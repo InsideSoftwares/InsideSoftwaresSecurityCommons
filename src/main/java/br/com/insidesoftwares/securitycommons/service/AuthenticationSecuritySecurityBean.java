@@ -4,7 +4,7 @@ import br.com.insidesoftwares.securitycommons.dto.AuthenticationDTO;
 import br.com.insidesoftwares.securitycommons.dto.JwtDTO;
 import br.com.insidesoftwares.securitycommons.enums.JWTErro;
 import br.com.insidesoftwares.securitycommons.implementation.AuthenticationSecurityService;
-import br.com.insidesoftwares.securitycommons.implementation.PermissionService;
+import br.com.insidesoftwares.securitycommons.implementation.AccessTokenService;
 import br.com.insidesoftwares.securitycommons.utils.AuthenticationUtils;
 import br.com.insidesoftwares.securitycommons.utils.JwtValidator;
 import io.fusionauth.jwt.domain.JWT;
@@ -16,7 +16,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,7 +25,7 @@ import java.util.Set;
 public class AuthenticationSecuritySecurityBean implements AuthenticationSecurityService {
 
     private final JwtValidator jwtValidator;
-    private final PermissionService permissionService;
+    private final AccessTokenService accessTokenService;
 
     @Override
     public AuthenticationDTO authentication(final HttpServletRequest request){
@@ -46,7 +45,7 @@ public class AuthenticationSecuritySecurityBean implements AuthenticationSecurit
                         JWT jwt = jwtDTO.getJwt();
                         identifier = jwt.uniqueId;
                         valid = true;
-                        Set<SimpleGrantedAuthority> permissions = permissionService.permissionByToken(token);
+                        Set<SimpleGrantedAuthority> permissions = accessTokenService.permissionByToken(token);
                         authentication = new UsernamePasswordAuthenticationToken(
                                         jwt.subject, null,
                                         permissions

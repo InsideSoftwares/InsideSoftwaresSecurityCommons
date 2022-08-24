@@ -2,7 +2,6 @@
 /home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/filter/AuthenticationFilter.java
 /home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/repository/AuthenticatedUserRepository.java
 /home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/utils/FilterUtils.java
-/home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/implementation/PermissionService.java
 /home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/service/AuthenticationSecuritySecurityBean.java
 /home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/dto/JwtDTO.java
 /home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/utils/AuthenticationUtils.java
@@ -12,5 +11,6 @@
 /home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/WebSecurityConfig.java
 /home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/utils/JwtValidator.java
 /home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/entity/AuthenticatedUser.java
-/home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/service/RedisPermissionService.java
+/home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/implementation/AccessTokenService.java
+/home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/service/RedisAccessTokenBean.java
 /home/sawcunha/Documentos/Projetos/InsideSoftwares/InsideSoftwaresSecurityCommons/src/main/java/br/com/insidesoftwares/securitycommons/implementation/AuthenticationSecurityService.java

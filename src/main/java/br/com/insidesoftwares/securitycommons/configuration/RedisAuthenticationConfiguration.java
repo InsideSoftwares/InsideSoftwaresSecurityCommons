@@ -45,5 +45,4 @@ public class RedisAuthenticationConfiguration {
         template.setConnectionFactory(redisConnectionFactory());
         return template;
     }
-
 }

@@ -1,7 +1,7 @@
 package br.com.insidesoftwares.securitycommons.utils;
 
+import br.com.insidesoftwares.commons.enums.InsideSoftwaresExceptionCode;
 import br.com.insidesoftwares.commons.specification.LocaleUtils;
-import br.com.insidesoftwares.execption.enums.Exception;
 import br.com.insidesoftwares.execption.model.ExceptionResponse;
 import br.com.insidesoftwares.securitycommons.enums.JWTErro;
 import com.google.gson.Gson;
@@ -46,21 +46,23 @@ public class FilterUtils {
                     .codeError(error.getCode())
                     .message(localeUtils.getMessage(error.getCode()))
                     .build();
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
 
-            response.getWriter().write(gson.toJson(exceptionResponse));
-        } catch (java.lang.Exception e) {
+            String body = gson.toJson(
+                    AuthenticationUtils.createResponse(exceptionResponse)
+            );
+
+            AuthenticationUtils.createResponseHttpServlet(response, body);
+        } catch (Exception e) {
             log.error("Error setUnauthorizedResponse", e);
             ExceptionResponse exceptionResponse = ExceptionResponse.builder()
-                    .codeError(Exception.GENERIC.getCode())
-                    .message(localeUtils.getMessage(Exception.GENERIC.getCode()))
+                    .codeError(InsideSoftwaresExceptionCode.GENERIC.getCode())
+                    .message(localeUtils.getMessage(InsideSoftwaresExceptionCode.GENERIC.getCode()))
                     .build();
-            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(gson.toJson(exceptionResponse));
+            String body = gson.toJson(
+                    AuthenticationUtils.createResponse(exceptionResponse)
+            );
+
+            AuthenticationUtils.createResponseHttpServlet(response, body);
         }
     }
 

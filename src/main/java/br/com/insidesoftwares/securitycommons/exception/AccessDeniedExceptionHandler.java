@@ -1,13 +1,11 @@
 package br.com.insidesoftwares.securitycommons.exception;
 
-
-import br.com.insidesoftwares.commons.specification.ExceptionCode;
+import br.com.insidesoftwares.commons.enums.InsideSoftwaresExceptionCode;
 import br.com.insidesoftwares.commons.specification.LocaleUtils;
-import br.com.insidesoftwares.execption.enums.Exception;
 import br.com.insidesoftwares.execption.model.ExceptionResponse;
+import br.com.insidesoftwares.securitycommons.utils.AuthenticationUtils;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
@@ -26,15 +24,17 @@ public class AccessDeniedExceptionHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException ex) throws IOException {
+
         ExceptionResponse exceptionResponse = ExceptionResponse.builder()
-                .codeError(Exception.ACCESS_DENIED.getCode())
-                .message(localeUtils.getMessage(Exception.ACCESS_DENIED.getCode()))
+                .codeError(InsideSoftwaresExceptionCode.ACCESS_DENIED.getCode())
+                .message(localeUtils.getMessage(InsideSoftwaresExceptionCode.ACCESS_DENIED.getCode()))
                 .build();
 
-        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(gson.toJson(exceptionResponse));
+        String body = gson.toJson(
+                AuthenticationUtils.createResponse(exceptionResponse)
+        );
+
+        AuthenticationUtils.createResponseHttpServlet(response, body);
 
     }
 }

@@ -1,6 +1,10 @@
 package br.com.insidesoftwares.securitycommons.enums;
 
-public enum JWTErro {
+import br.com.insidesoftwares.commons.specification.ExceptionCode;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public enum JWTErro implements ExceptionCode {
     GENERIC("AUTH-001"),
     EXPIRED("AUTH-002"),
     SIGNING_ERRO("AUTH-003"),
@@ -10,10 +14,7 @@ public enum JWTErro {
 
     private final String code;
 
-    JWTErro(String code) {
-        this.code = code;
-    }
-
+    @Override
     public String getCode() {
         return code;
     }

@@ -2,27 +2,26 @@ package br.com.insidesoftwares.securitycommons.service;
 
 import br.com.insidesoftwares.securitycommons.dto.AuthenticationDTO;
 import br.com.insidesoftwares.securitycommons.dto.JwtDTO;
+import br.com.insidesoftwares.securitycommons.entity.AuthenticatedUser;
+import br.com.insidesoftwares.securitycommons.entity.InsideSoftwaresAuthentication;
 import br.com.insidesoftwares.securitycommons.enums.JWTErro;
-import br.com.insidesoftwares.securitycommons.implementation.AuthenticationSecurityService;
 import br.com.insidesoftwares.securitycommons.implementation.AccessTokenService;
+import br.com.insidesoftwares.securitycommons.implementation.AuthenticationSecurityService;
 import br.com.insidesoftwares.securitycommons.utils.AuthenticationUtils;
 import br.com.insidesoftwares.securitycommons.utils.JwtValidator;
 import io.fusionauth.jwt.domain.JWT;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 @Log4j2
-public class AuthenticationSecuritySecurityBean implements AuthenticationSecurityService {
+class AuthenticationSecurityBean implements AuthenticationSecurityService {
 
     private final JwtValidator jwtValidator;
     private final AccessTokenService accessTokenService;
@@ -44,12 +43,13 @@ public class AuthenticationSecuritySecurityBean implements AuthenticationSecurit
                     if (Objects.nonNull(jwtDTO.getJwt())) {
                         JWT jwt = jwtDTO.getJwt();
                         identifier = jwt.uniqueId;
-                        valid = true;
-                        Set<SimpleGrantedAuthority> permissions = accessTokenService.permissionByToken(token);
-                        authentication = new UsernamePasswordAuthenticationToken(
-                                        jwt.subject, null,
-                                        permissions
+                        AuthenticatedUser authenticatedUser = accessTokenService.findAuthenticatedUserByToken(token);
+                        authentication = InsideSoftwaresAuthentication.authenticated(
+                                authenticatedUser.getUsername(),
+                                authenticatedUser.createInsideSoftwaresCredentials(),
+                                authenticatedUser.getSimpleGrantedAuthority()
                         );
+                        valid = true;
                     }
                 }
             } else {

@@ -8,13 +8,13 @@ Projeto por manter as configurações, tratamento e padrões da Autenticação e
 ## Framework Utilizado
 
 * [Spring Boot]('https://spring.io/projects/spring-boot')
-  * Versão: 2.7.2
+  * Versão: 2.7.3
 * [Java]('https://www.java.com/pt-BR/')
   * Versão: 17 ou superior
 
 ## Usado pelos projetos
 
-Esse projeto é usado pelas seguintes empresas:
+Esse projeto é usado pelas seguintes projetos:
 
 - [InsideSoftwaresAuthenticator]('https://github.com/InsideSoftwares/InsideSoftwaresAuthenticator') 
 - [InsideSoftwaresAccessControl]('https://github.com/InsideSoftwares/access_control_back')
@@ -62,11 +62,12 @@ Esse projeto é usado pelas seguintes empresas:
 
         private final AccessDeniedExceptionHandler accessDeniedExceptionHandler;
         private final AuthenticationFilter authenticationFilter;
+        private final CorsFilter corsFilter;
 
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
             return WebSecurityConfig.securityFilterChain(
-                    httpSecurity, accessDeniedExceptionHandler, authenticationFilter
+                    httpSecurity, accessDeniedExceptionHandler, authenticationFilter, corsFilter
             );
         }
 
@@ -96,4 +97,13 @@ Esse projeto é usado pelas seguintes empresas:
     jwt:
     secret: '{cipher}ce6f091a2b60096ead2c6968e3ec634fd87e863b82e69b3bcc35a4f314a9cf4fc5cc249e6b1a80c9ff6a2e988b8593757f0bdd43cdea45687d433b955033b6bce8bdca1e1fe859f376fff307f7fda93f9368741e259ad2defb1672b1e4fb4017c35f71da3aa177818f760582327a26ee' #Segredo Criptografado
     valid: 60 #Sets token validity time in minutes 
+  ``` 
+  * As configuração de cors não são obrigatorias, porém para alterar o comportamento default da aplicação necessário realizar a configuração abaixo no properties:
+  ```
+    cors-security:
+      allowOrigin: '*'
+      allowMethods: 'GET,POST,DELETE,PUT'
+      allowHeaders: '*'
+      allowCredentials: 'true' 
+      maxAge: '1800' 
   ``` 

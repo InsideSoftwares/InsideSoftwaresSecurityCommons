@@ -3,12 +3,12 @@ package br.com.insidesoftwares.securitycommons.utils;
 import br.com.insidesoftwares.commons.enums.InsideSoftwaresExceptionCode;
 import br.com.insidesoftwares.commons.specification.LocaleUtils;
 import br.com.insidesoftwares.execption.model.ExceptionResponse;
+import br.com.insidesoftwares.securitycommons.configuration.properties.CorsProperties;
 import br.com.insidesoftwares.securitycommons.enums.JWTErro;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +23,7 @@ import java.util.Objects;
 public class FilterUtils {
 
     private final LocaleUtils localeUtils;
+    private final CorsProperties corsProperties;
     private final Gson gson;
 
     public void setLocale(HttpServletRequest request){
@@ -32,11 +33,11 @@ public class FilterUtils {
     }
 
     public void enableCors(HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "GET,POST,DELETE,PUT,OPTIONS");
-        response.setHeader("Access-Control-Allow-Headers", "*");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Max-Age", "1800");
+        response.setHeader("Access-Control-Allow-Origin", corsProperties.getAllowOrigin());
+        response.setHeader("Access-Control-Allow-Methods", corsProperties.getAllowMethods());
+        response.setHeader("Access-Control-Allow-Headers", corsProperties.getAllowHeaders());
+        response.setHeader("Access-Control-Allow-Credentials", corsProperties.getAllowCredentials());
+        response.setHeader("Access-Control-Max-Age", corsProperties.getMaxAge());
     }
 
     public void setUnauthorizedResponse(HttpServletResponse response, JWTErro error) throws IOException {

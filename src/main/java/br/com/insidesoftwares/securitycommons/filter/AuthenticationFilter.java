@@ -3,7 +3,6 @@ package br.com.insidesoftwares.securitycommons.filter;
 
 import br.com.insidesoftwares.securitycommons.dto.AuthenticationDTO;
 import br.com.insidesoftwares.securitycommons.implementation.AuthenticationSecurityService;
-import br.com.insidesoftwares.securitycommons.utils.AuthenticationUtils;
 import br.com.insidesoftwares.securitycommons.utils.FilterUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,7 +19,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,7 +41,6 @@ public class AuthenticationFilter extends GenericFilterBean {
         HttpServletResponse response = (HttpServletResponse) res;
 
         filterUtils.setLocale(request);
-        filterUtils.enableCors(response);
 
         if(isValidationJWT(request.getServletPath())) {
             AuthenticationDTO authenticationDTO = authenticationSecurityService.authentication(request);

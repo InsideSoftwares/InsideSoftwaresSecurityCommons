@@ -6,14 +6,18 @@ import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.session.SessionManagementFilter;
 import org.springframework.web.filter.GenericFilterBean;
+
+import javax.servlet.Filter;
 
 public class WebSecurityConfig {
 
     public static SecurityFilterChain securityFilterChain(
             HttpSecurity httpSecurity,
             AccessDeniedExceptionHandler accessDeniedExceptionHandler,
-            GenericFilterBean genericFilterBean
+            GenericFilterBean genericFilterBean,
+            Filter corsFilter
     ) throws Exception {
         httpSecurity.authorizeHttpRequests(
                 auth -> auth
@@ -23,6 +27,10 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .csrf().disable()
+                .addFilterBefore(
+                        corsFilter,
+                        SessionManagementFilter.class
+                )
                 .addFilterBefore(
                         genericFilterBean,
                         UsernamePasswordAuthenticationFilter.class

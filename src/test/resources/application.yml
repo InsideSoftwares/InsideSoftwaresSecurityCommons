@@ -1,0 +1,3 @@
+jwt:
+  secret: 'SecretJWT'
+  valid: 60 #Sets token validity time in minutes

@@ -8,7 +8,7 @@ Projeto por manter as configurações, tratamento e padrões da Autenticação e
 ## Framework Utilizado
 
 * [Spring Boot]('https://spring.io/projects/spring-boot')
-  * Versão: 2.7.3
+  * Versão: 2.7.4
 * [Java]('https://www.java.com/pt-BR/')
   * Versão: 17 ou superior
 

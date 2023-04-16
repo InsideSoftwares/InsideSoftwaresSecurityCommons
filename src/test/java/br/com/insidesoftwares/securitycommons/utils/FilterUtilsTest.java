@@ -94,31 +94,4 @@ class FilterUtilsTest {
         assertEquals(ALLOW_CREDENTIALS, mockHttpServletResponse.getHeader("Access-Control-Allow-Credentials"));
         assertEquals(MAX_AGE, mockHttpServletResponse.getHeader("Access-Control-Max-Age"));
     }
-
-    @Test
-    void setUnauthorizedResponseSuccess() throws IOException {
-        when(localeUtils.getMessage(anyString())).thenReturn(MESSAGE_ERROR);
-
-        MockHttpServletResponse mockHttpServletResponse = new MockHttpServletResponse();
-
-        filterUtils.setUnauthorizedResponse(mockHttpServletResponse, JWTErro.GENERIC);
-
-        assertEquals(BODY_RESPONSE, mockHttpServletResponse.getContentAsString());
-        assertEquals(HttpStatus.UNAUTHORIZED.value(), mockHttpServletResponse.getStatus());
-
-    }
-
-    @Test
-    void setUnauthorizedResponseError() throws IOException {
-        when(localeUtils.getMessage(JWTErro.GENERIC.getCode())).thenThrow(new NullPointerException());
-        when(localeUtils.getMessage(InsideSoftwaresExceptionCode.GENERIC.getCode())).thenReturn(MESSAGE_ERROR);
-
-        MockHttpServletResponse mockHttpServletResponse = new MockHttpServletResponse();
-
-        filterUtils.setUnauthorizedResponse(mockHttpServletResponse, JWTErro.GENERIC);
-
-        assertEquals(BODY_RESPONSE_ERROR, mockHttpServletResponse.getContentAsString());
-        assertEquals(HttpStatus.UNAUTHORIZED.value(), mockHttpServletResponse.getStatus());
-
-    }
 }

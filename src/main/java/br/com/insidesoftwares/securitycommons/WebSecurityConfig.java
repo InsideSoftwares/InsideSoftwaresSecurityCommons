@@ -1,39 +1,35 @@
 package br.com.insidesoftwares.securitycommons;
 
 import br.com.insidesoftwares.securitycommons.exception.AccessDeniedExceptionHandler;
+import com.azure.spring.cloud.autoconfigure.implementation.aad.security.AadResourceServerHttpSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.session.SessionManagementFilter;
-import org.springframework.web.filter.GenericFilterBean;
 
-import javax.servlet.Filter;
+import jakarta.servlet.Filter;
 
 public class WebSecurityConfig {
 
     public static SecurityFilterChain securityFilterChain(
             HttpSecurity httpSecurity,
             AccessDeniedExceptionHandler accessDeniedExceptionHandler,
-            GenericFilterBean genericFilterBean,
             Filter corsFilter
     ) throws Exception {
-        httpSecurity.authorizeHttpRequests(
-                auth -> auth
-                        .antMatchers("/**").permitAll()
-                        .antMatchers("/api/**").denyAll()
-                        .antMatchers("/api/authentication/**").permitAll()
-                        .anyRequest().authenticated()
-                )
+
+        httpSecurity.apply(AadResourceServerHttpSecurityConfigurer.aadResourceServer())
+                .and()
+                // All the paths that match `/api/**`(configurable) work as the resource server. Other paths work as the web application.
+                .securityMatcher("/api/**")
+                .authorizeHttpRequests()
+                .requestMatchers("/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .csrf().disable()
                 .addFilterBefore(
                         corsFilter,
                         SessionManagementFilter.class
-                )
-                .addFilterBefore(
-                        genericFilterBean,
-                        UsernamePasswordAuthenticationFilter.class
                 )
                .exceptionHandling().accessDeniedHandler(accessDeniedExceptionHandler);
         httpSecurity.headers().frameOptions().disable();

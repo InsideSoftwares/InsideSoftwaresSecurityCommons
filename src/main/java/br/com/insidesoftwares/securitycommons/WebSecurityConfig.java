@@ -2,13 +2,12 @@ package br.com.insidesoftwares.securitycommons;
 
 import br.com.insidesoftwares.securitycommons.exception.AccessDeniedExceptionHandler;
 import com.azure.spring.cloud.autoconfigure.implementation.aad.security.AadResourceServerHttpSecurityConfigurer;
+import jakarta.servlet.Filter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.session.SessionManagementFilter;
-
-import jakarta.servlet.Filter;
 
 public class WebSecurityConfig {
 

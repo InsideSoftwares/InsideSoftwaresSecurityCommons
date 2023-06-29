@@ -23,6 +23,15 @@ Esse projeto é usado pelas seguintes projetos:
 
 ## Utilização em demais projetos
 
+  * Obrigatorio importa no projeto.
+  ```
+  <dependency>
+      <groupId>br.com.insidesoftwares.securitycommons</groupId>
+      <artifactId>security</artifactId>
+      <version>1.0-SNAPSHOT</version>
+  </dependency>
+  ```
+
   * Importa no pom do projeto Spring para integração de segurança com Azure Active Directory:
   ```
   <dependency>

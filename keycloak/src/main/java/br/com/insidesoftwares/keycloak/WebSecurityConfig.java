@@ -3,15 +3,15 @@ package br.com.insidesoftwares.keycloak;
 import br.com.insidesoftwares.exception.AccessDeniedExceptionHandler;
 import br.com.insidesoftwares.filter.CorsFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.session.SessionManagementFilter;
 
-@Configuration
+@AutoConfiguration
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
@@ -29,6 +29,7 @@ public class WebSecurityConfig {
                 // All the paths that match `/api/**`(configurable) work as the resource server. Other paths work as the web application.
                 .securityMatcher("/api/**")
                 .authorizeHttpRequests()
+                .requestMatchers("/swagger-ui/**", "**/api-docs/**").permitAll()
                 .requestMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

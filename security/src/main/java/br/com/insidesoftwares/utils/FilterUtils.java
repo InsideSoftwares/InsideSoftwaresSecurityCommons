@@ -1,8 +1,6 @@
 package br.com.insidesoftwares.utils;
 
-import br.com.insidesoftwares.commons.specification.LocaleUtils;
 import br.com.insidesoftwares.configuration.properties.CorsProperties;
-import com.google.gson.Gson;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +16,7 @@ import java.util.Objects;
 @Log4j2
 public class FilterUtils {
 
-    private final LocaleUtils localeUtils;
     private final CorsProperties corsProperties;
-    private final Gson gson;
 
     public void setLocale(HttpServletRequest request){
         String language = request.getHeader("Accept-Language");

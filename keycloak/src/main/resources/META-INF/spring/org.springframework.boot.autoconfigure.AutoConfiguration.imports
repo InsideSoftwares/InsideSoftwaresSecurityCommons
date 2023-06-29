@@ -1,0 +1,3 @@
+br.com.insidesoftwares.keycloak.JwtAuthConverter
+br.com.insidesoftwares.keycloak.JwtAuthConverterProperties
+br.com.insidesoftwares.keycloak.WebSecurityConfig

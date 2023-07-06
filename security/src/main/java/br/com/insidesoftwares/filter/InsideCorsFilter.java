@@ -19,7 +19,7 @@ import java.io.IOException;
 @Order(1)
 @RequiredArgsConstructor
 @Log4j2
-public class CorsFilter implements Filter {
+public class InsideCorsFilter implements Filter {
 
     private final FilterUtils filterUtils;
 

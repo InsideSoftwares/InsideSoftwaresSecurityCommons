@@ -64,7 +64,7 @@ Esse projeto é usado pelas seguintes projetos:
     }
   ```
 
-  * Será necessário também criar uma classe de configuração para ativar as regras e acesso autenticado da aplicação:
+  * Será necessário também criar uma classe de configuração para ativar as regras e acesso autenticado da aplicação no projeto:
   ```
     @Configuration
     @EnableWebSecurity

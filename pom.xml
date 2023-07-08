@@ -16,9 +16,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
+        <module>security</module>
         <module>keycloak</module>
         <module>azure-active-directory</module>
-        <module>security</module>
     </modules>
 
     <properties>

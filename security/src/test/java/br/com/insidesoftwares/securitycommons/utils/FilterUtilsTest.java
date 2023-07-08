@@ -1,12 +1,10 @@
 package br.com.insidesoftwares.securitycommons.utils;
 
-import br.com.insidesoftwares.commons.specification.LocaleUtils;
 import br.com.insidesoftwares.configuration.properties.CorsProperties;
 import br.com.insidesoftwares.securitycommons.LocaleUtilsBean;
 import br.com.insidesoftwares.utils.FilterUtils;
 import com.google.gson.Gson;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
@@ -15,7 +13,6 @@ import org.springframework.cloud.autoconfigure.RefreshAutoConfiguration;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Locale;
 
@@ -28,27 +25,14 @@ class FilterUtilsTest {
 
     @InjectMocks
     private FilterUtils filterUtils;
-
-    @Mock
-    private LocaleUtils localeUtils;
     @Mock
     private CorsProperties corsProperties;
-
-    private final Gson gson = new Gson();
 
     private final static String ALLOW_CREDENTIALS = "true";
     private final static String ALLOW_METHODS = "GET,DELETE";
     private final static String ALLOW_HEADERS = "*";
     private final static String MAX_AGE = "1200";
     private final static String ALLOW_ORIGIN = "http://localhost:5596";
-    private final static String MESSAGE_ERROR = "Message Error LocaleUtils";
-    private final static String BODY_RESPONSE = "{\"data\":{\"message\":\"Message Error LocaleUtils\",\"codeError\":\"AUTH-001\"}}";
-    private final static String BODY_RESPONSE_ERROR = "{\"data\":{\"message\":\"Message Error LocaleUtils\",\"codeError\":\"INS-003\"}}";
-
-    @BeforeEach
-    public void setup() {
-        ReflectionTestUtils.setField(filterUtils, "gson", gson);
-    }
 
     @Test
     void setLocale() {

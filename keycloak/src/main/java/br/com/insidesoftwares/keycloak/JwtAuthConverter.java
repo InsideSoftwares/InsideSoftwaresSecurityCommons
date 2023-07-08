@@ -1,6 +1,7 @@
 package br.com.insidesoftwares.keycloak;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -9,7 +10,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimNames;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Map;
@@ -18,9 +18,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-@Component
+@AutoConfiguration
 public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 
+    private static final String ROLES = "roles";
+    private static final String RESOURCE_ACCESS = "resource_access";
 
     private final JwtAuthConverterProperties properties;
 
@@ -40,7 +42,7 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
     }
 
     private Collection<GrantedAuthority> extractResourceRoles(Jwt jwt) {
-        Map<String, Object> resourceAccess = jwt.getClaim("resource_access");
+        Map<String, Object> resourceAccess = jwt.getClaim(RESOURCE_ACCESS);
 
         if (Objects.isNull(resourceAccess) || Objects.isNull(properties.getResourceId())) return Set.of();
 
@@ -48,7 +50,7 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
 
         if (Objects.isNull(resource)) return Set.of();
 
-        Collection<String> resourceRoles = (Collection<String>) resource.get("roles");
+        Collection<String> resourceRoles = (Collection<String>) resource.get(ROLES);
 
         if (Objects.isNull(resourceRoles)) return Set.of();
 

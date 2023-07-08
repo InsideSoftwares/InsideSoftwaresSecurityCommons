@@ -2,16 +2,14 @@ package br.com.insidesoftwares.configuration.properties;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Data
-@Component
-@ConfigurationProperties
+@Configuration
 @RefreshScope
 public class CorsProperties {
 

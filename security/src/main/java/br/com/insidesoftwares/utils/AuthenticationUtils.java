@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
 
@@ -30,5 +31,9 @@ public class AuthenticationUtils {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(body);
+    }
+
+    public static String getUserNameAuthenticated(){
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }

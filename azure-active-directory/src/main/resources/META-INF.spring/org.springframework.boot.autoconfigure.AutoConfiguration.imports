@@ -1,1 +1,3 @@
-br.com.insidesoftwares.azureactivedirectory.WebSecurityConfig
+br.com.insidesoftwares.azureactivedirectory.WebSecurityConfi
+br.com.insidesoftwares.configuration.GrantedAuthorityConfiguration
+br.com.insidesoftwares.configuration.InsideHttpSecurityConfiguration

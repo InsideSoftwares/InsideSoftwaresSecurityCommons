@@ -1,15 +1,12 @@
 package br.com.insidesoftwares.securitycommons.utils;
 
 import br.com.insidesoftwares.configuration.properties.CorsProperties;
-import br.com.insidesoftwares.securitycommons.LocaleUtilsBean;
 import br.com.insidesoftwares.utils.FilterUtils;
-import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.autoconfigure.RefreshAutoConfiguration;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -19,8 +16,7 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(classes = {FilterUtils.class, CorsProperties.class, LocaleUtilsBean.class, Gson.class})
-@ImportAutoConfiguration(RefreshAutoConfiguration.class)
+@ExtendWith(MockitoExtension.class)
 class FilterUtilsTest {
 
     @InjectMocks

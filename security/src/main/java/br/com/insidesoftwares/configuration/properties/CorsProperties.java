@@ -13,6 +13,8 @@ import java.util.List;
 @RefreshScope
 public class CorsProperties {
 
+    private final String COMMA_REGEX = ",";
+
     @Value("${cors-security.allowOrigin:*}")
     private String allowOrigin;
     @Value("${cors-security.allowMethods:GET,POST,DELETE,PUT,OPTIONS}")
@@ -25,15 +27,15 @@ public class CorsProperties {
     private String maxAge;
 
     public List<String> allowOrigin() {
-        return Arrays.stream(allowOrigin.split(",")).toList();
+        return Arrays.stream(allowOrigin.split(COMMA_REGEX)).toList();
     }
 
     public List<String> allowMethods() {
-        return Arrays.stream(allowMethods.split(",")).toList();
+        return Arrays.stream(allowMethods.split(COMMA_REGEX)).toList();
     }
 
     public List<String> allowHeaders() {
-        return Arrays.stream(allowHeaders.split(",")).toList();
+        return Arrays.stream(allowHeaders.split(COMMA_REGEX)).toList();
     }
 
     public Long maxAge() {

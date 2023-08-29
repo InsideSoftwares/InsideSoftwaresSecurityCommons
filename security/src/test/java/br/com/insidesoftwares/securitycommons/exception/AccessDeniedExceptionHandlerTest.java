@@ -2,15 +2,13 @@ package br.com.insidesoftwares.securitycommons.exception;
 
 import br.com.insidesoftwares.commons.specification.LocaleUtils;
 import br.com.insidesoftwares.exception.AccessDeniedExceptionHandler;
-import br.com.insidesoftwares.securitycommons.LocaleUtilsBean;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.autoconfigure.RefreshAutoConfiguration;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -23,8 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(classes = {AccessDeniedExceptionHandler.class, LocaleUtilsBean.class, Gson.class})
-@ImportAutoConfiguration(RefreshAutoConfiguration.class)
+@ExtendWith(MockitoExtension.class)
 class AccessDeniedExceptionHandlerTest {
 
     @InjectMocks
@@ -39,7 +36,7 @@ class AccessDeniedExceptionHandlerTest {
     private final static String BODY_RESPONSE = "{\"data\":{\"message\":\"Message Error LocaleUtils\",\"codeError\":\"INS-004\"}}";
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         ReflectionTestUtils.setField(accessDeniedExceptionHandler, "gson", gson);
     }
 

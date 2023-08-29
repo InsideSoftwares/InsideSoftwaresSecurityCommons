@@ -1,3 +1,5 @@
 br.com.insidesoftwares.keycloak.JwtAuthConverter
 br.com.insidesoftwares.keycloak.JwtAuthConverterProperties
 br.com.insidesoftwares.keycloak.WebSecurityConfig
+br.com.insidesoftwares.configuration.GrantedAuthorityConfiguration
+br.com.insidesoftwares.configuration.InsideHttpSecurityConfiguration

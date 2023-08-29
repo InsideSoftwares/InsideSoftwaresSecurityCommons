@@ -20,7 +20,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>br.com.insidesoftwares</groupId>
+            <groupId>br.com.insidesoftwares.securitycommons</groupId>
             <artifactId>security</artifactId>
         </dependency>
     </dependencies>

@@ -1,7 +1,7 @@
 package br.com.insidesoftwares.filter;
 
 import br.com.insidesoftwares.commons.enums.InsideSoftwaresExceptionCode;
-import br.com.insidesoftwares.commons.specification.LocaleUtils;
+import br.com.insidesoftwares.commons.specification.LocaleService;
 import br.com.insidesoftwares.exception.model.ExceptionResponse;
 import br.com.insidesoftwares.utils.AuthenticationUtils;
 import com.google.gson.Gson;
@@ -27,7 +27,7 @@ import java.io.IOException;
 @Log4j2
 public class AuthorizationRequiredFilter implements Filter {
 
-    private final LocaleUtils localeUtils;
+    private final LocaleService localeService;
     private final Gson gson;
     @Value("${server.servlet.context-path}")
     private String contextPath;
@@ -51,7 +51,7 @@ public class AuthorizationRequiredFilter implements Filter {
         if (authorizationHeader == null || authorizationHeader.isEmpty()) {
             ExceptionResponse exceptionResponse = ExceptionResponse.builder()
                     .codeError(InsideSoftwaresExceptionCode.TOKEN_NOT_PROVIDED.getCode())
-                    .message(localeUtils.getMessage(InsideSoftwaresExceptionCode.TOKEN_NOT_PROVIDED.getCode()))
+                    .message(localeService.getMessage(InsideSoftwaresExceptionCode.TOKEN_NOT_PROVIDED.getCode()))
                     .build();
 
             String body = gson.toJson(

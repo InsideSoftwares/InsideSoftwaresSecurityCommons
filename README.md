@@ -70,9 +70,6 @@ Esse projeto é usado pelas seguintes projetos:
     @Configuration
     @EnableWebSecurity
     @EnableMethodSecurity
-    @ComponentScan(basePackages = {
-        "br.com.insidesoftwares.authenticator.controller"
-    })
     @RequiredArgsConstructor
     public class SecurityConfiguration {}
   ```

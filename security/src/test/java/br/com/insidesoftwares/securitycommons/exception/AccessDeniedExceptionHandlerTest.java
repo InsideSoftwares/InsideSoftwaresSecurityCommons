@@ -1,6 +1,6 @@
 package br.com.insidesoftwares.securitycommons.exception;
 
-import br.com.insidesoftwares.commons.specification.LocaleUtils;
+import br.com.insidesoftwares.commons.specification.LocaleService;
 import br.com.insidesoftwares.exception.AccessDeniedExceptionHandler;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +28,7 @@ class AccessDeniedExceptionHandlerTest {
     private AccessDeniedExceptionHandler accessDeniedExceptionHandler;
 
     @Mock
-    private LocaleUtils localeUtils;
+    private LocaleService localeService;
 
     private final Gson gson = new Gson();
 
@@ -42,7 +42,7 @@ class AccessDeniedExceptionHandlerTest {
 
     @Test
     void handle() throws IOException {
-        when(localeUtils.getMessage(anyString())).thenReturn(MESSAGE_ERROR);
+        when(localeService.getMessage(anyString())).thenReturn(MESSAGE_ERROR);
 
         MockHttpServletRequest httpServletRequest = new MockHttpServletRequest();
         MockHttpServletResponse mockHttpServletResponse = new MockHttpServletResponse();

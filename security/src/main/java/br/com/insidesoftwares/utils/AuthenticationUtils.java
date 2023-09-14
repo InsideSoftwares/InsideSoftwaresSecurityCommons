@@ -1,6 +1,6 @@
 package br.com.insidesoftwares.utils;
 
-import br.com.insidesoftwares.commons.dto.response.InsideSoftwaresResponse;
+import br.com.insidesoftwares.commons.dto.response.InsideSoftwaresResponseDTO;
 import br.com.insidesoftwares.exception.model.ExceptionResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,8 +20,8 @@ public class AuthenticationUtils {
         return request.getHeader(HEADER_STRING);
     }
 
-    public static InsideSoftwaresResponse<ExceptionResponse> createResponse(ExceptionResponse exceptionResponse){
-        return InsideSoftwaresResponse.<ExceptionResponse>builder()
+    public static InsideSoftwaresResponseDTO<ExceptionResponse> createResponse(ExceptionResponse exceptionResponse){
+        return InsideSoftwaresResponseDTO.<ExceptionResponse>builder()
                 .data(exceptionResponse)
                 .build();
     }

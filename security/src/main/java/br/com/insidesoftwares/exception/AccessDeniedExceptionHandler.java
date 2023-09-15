@@ -1,7 +1,7 @@
 package br.com.insidesoftwares.exception;
 
 import br.com.insidesoftwares.commons.enums.InsideSoftwaresExceptionCode;
-import br.com.insidesoftwares.commons.specification.LocaleUtils;
+import br.com.insidesoftwares.commons.specification.LocaleService;
 import br.com.insidesoftwares.exception.model.ExceptionResponse;
 import br.com.insidesoftwares.utils.AuthenticationUtils;
 import com.google.gson.Gson;
@@ -18,7 +18,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AccessDeniedExceptionHandler implements AccessDeniedHandler {
 
-    private final LocaleUtils localeUtils;
+    private final LocaleService localeService;
     private final Gson gson;
 
     @Override
@@ -27,7 +27,7 @@ public class AccessDeniedExceptionHandler implements AccessDeniedHandler {
 
         ExceptionResponse exceptionResponse = ExceptionResponse.builder()
                 .codeError(InsideSoftwaresExceptionCode.ACCESS_DENIED.getCode())
-                .message(localeUtils.getMessage(InsideSoftwaresExceptionCode.ACCESS_DENIED.getCode()))
+                .message(localeService.getMessage(InsideSoftwaresExceptionCode.ACCESS_DENIED.getCode()))
                 .build();
 
         String body = gson.toJson(

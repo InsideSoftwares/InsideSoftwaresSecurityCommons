@@ -1,6 +1,6 @@
 package br.com.insidesoftwares.securitycommons.utils;
 
-import br.com.insidesoftwares.commons.dto.response.InsideSoftwaresResponse;
+import br.com.insidesoftwares.commons.dto.response.InsideSoftwaresResponseDTO;
 import br.com.insidesoftwares.exception.model.ExceptionResponse;
 import br.com.insidesoftwares.utils.AuthenticationUtils;
 import org.junit.jupiter.api.Test;
@@ -31,11 +31,11 @@ class AuthenticationUtilsTest {
 
     @Test
     void createResponse() {
-        InsideSoftwaresResponse<ExceptionResponse> insideSoftwaresResponseExpected =  InsideSoftwaresResponse.<ExceptionResponse>builder()
+        InsideSoftwaresResponseDTO<ExceptionResponse> insideSoftwaresResponseExpected =  InsideSoftwaresResponseDTO.<ExceptionResponse>builder()
                 .data(createExceptionResponse())
                 .build();
 
-        InsideSoftwaresResponse<ExceptionResponse> insideSoftwaresResponseResult = AuthenticationUtils.createResponse(createExceptionResponse());
+        InsideSoftwaresResponseDTO<ExceptionResponse> insideSoftwaresResponseResult = AuthenticationUtils.createResponse(createExceptionResponse());
 
         assertEquals(insideSoftwaresResponseExpected.getData().getCodeError(), insideSoftwaresResponseResult.getData().getCodeError());
         assertEquals(insideSoftwaresResponseExpected.getData().getMessage(), insideSoftwaresResponseResult.getData().getMessage());

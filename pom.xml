@@ -37,7 +37,7 @@
         <spring-cloud-azure-starter-active-directory.version>5.5.0</spring-cloud-azure-starter-active-directory.version>
 
         <snakeyaml.version>2.1</snakeyaml.version>
-        <json.version>20230618</json.version>
+        <json.version>20231013</json.version>
     </properties>
 
     <dependencyManagement>

@@ -8,9 +8,9 @@ Projeto por manter as configurações, tratamento e padrões da Autenticação e
 ## Framework Utilizado
 
 * [Spring Boot](https://spring.io/projects/spring-boot)
-  * Versão: 3.1.3
+  * Versão: 3.1.5
 * [Java](https://www.java.com/pt-BR/)
-  * Versão: 17 ou superior
+  * Versão: 21 ou superior
 
 ## Usado pelos projetos
 
@@ -33,14 +33,6 @@ Esse projeto é usado pelas seguintes projetos:
   </dependency>
   ```
 
-  * Importa no pom do projeto Spring para integração de segurança com Azure Active Directory:
-  ```xml
-  <dependency>
-      <groupId>br.com.insidesoftwares.securitycommons</groupId>
-      <artifactId>azure-active-directory</artifactId>
-      <version>1.0-SNAPSHOT</version>
-  </dependency>
-  ```
   *  Importa no pom do projeto Spring para integração de segurança com Keycloak
   ```xml
   <dependency>

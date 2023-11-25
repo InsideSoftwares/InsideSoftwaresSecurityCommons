@@ -23,7 +23,7 @@ public class InsideHttpSecurityConfiguration {
     @Bean("InsideHttpSecurityConfiguration")
     public HttpSecurity insideHttpSecurityConfiguration(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .authorizeHttpRequests((authorize) -> authorize
+                .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/swagger-ui/**", "**/api-docs/**", "/**").permitAll()
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().authenticated()
